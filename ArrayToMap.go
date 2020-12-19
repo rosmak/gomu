@@ -9,8 +9,8 @@ func reflectString() reflect.Type {
 	return reflect.TypeOf("r")
 }
 
-//ToMap ...
-func ToMap(mf interface{}, sl interface{}) error {
+//ArrayToMap ...
+func ArrayToMap(mf interface{}, sl interface{}) error {
 	ptrMapField := reflect.ValueOf(mf)
 	valElem := ptrMapField.Elem()
 

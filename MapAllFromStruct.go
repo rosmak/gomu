@@ -22,7 +22,7 @@ func MapAllFromStruct(elem interface{}) error {
 				MapAllFromStruct(eachElem)
 			}
 
-			ToMap(mapVal, arrVal)
+			ArrayToMap(mapVal, arrVal)
 
 		}
 	}
