@@ -1,9 +1,8 @@
 package gomu
 
 import (
+	"fmt"
 	"reflect"
-
-	"github.com/google/uuid"
 )
 
 func reflectString() reflect.Type {
@@ -30,7 +29,7 @@ func ToMap(mf interface{}, sl interface{}) error {
 	for i := 0; i < valSlice.Len(); i++ {
 		each := valSlice.Index(i)
 		eachValue := reflect.ValueOf(each.Interface())
-		uidString := each.FieldByName("ID").Interface().(uuid.UUID).String()
+		uidString := each.FieldByName("ID").Interface().(fmt.Stringer).String()
 		virtualMap.SetMapIndex(reflect.ValueOf(uidString), eachValue.Convert(reflectEntityType))
 	}
 
