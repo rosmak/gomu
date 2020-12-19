@@ -4,8 +4,8 @@ import (
 	"reflect"
 )
 
-//ToMapAllFields ...
-func ToMapAllFields(elem interface{}) error {
+//MapAllFromStruct ...
+func MapAllFromStruct(elem interface{}) error {
 	ptrElem := reflect.ValueOf(elem)
 	valElem := ptrElem.Elem()
 	typeOfS := valElem.Type()
@@ -16,6 +16,11 @@ func ToMapAllFields(elem interface{}) error {
 		if arrF != "" {
 			mapVal := valElem.FieldByName(mapF).Addr().Interface()
 			arrVal := valElem.FieldByName(arrF).Addr().Interface()
+			arrFromField := valElem.FieldByName(arrF)
+			for j := 0; j < arrFromField.Len(); j++ {
+				eachElem := arrFromField.Index(j).Addr().Interface()
+				MapAllFromStruct(eachElem)
+			}
 
 			ToMap(mapVal, arrVal)
 
